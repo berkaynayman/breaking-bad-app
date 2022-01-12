@@ -4,24 +4,30 @@ import {useSelector, useDispatch} from "react-redux"
 import {getCharacters} from "../../redux/charactersSlice"
 import Loading from '../../Components/Loading'
 import Error from '../../Components/Error'
+import {Link} from "react-router-dom"
 
 import './style.css'
 
 function Home() {
-    const characters = useSelector((state) => state.characters.items)
-    const nextPage   = useSelector((state) => state.characters.page)
+    const characters  = useSelector((state) => state.characters.items)
+    const nextPage    = useSelector((state) => state.characters.page)
     const hasNextPage = useSelector((state) => state.characters.hasNextPage)
-    const isLoading  = useSelector((state) => state.characters.isLoading)
-    const error      = useSelector((state) => state.characters.error)
+    const status      = useSelector((state) => state.characters.status)
+    const error       = useSelector((state) => state.characters.error)
 
     const dispatch = useDispatch()
-    console.log(characters);
     
+    /*sayfalama yaptığımız için bu sayfaya geri dönüyoruz
+    ve her geri döndüğüm zaman getCharactersin çalışması
+    iyi bir durum değil. bu yüzden status değişkeninden
+    yardım alarak bu sorunu çözüyoruz*/
     useEffect(() =>{
-        dispatch(getCharacters())
-    },[dispatch])
+        if(status === 'idle'){
+            dispatch(getCharacters())
+        }
+    },[dispatch, status])
 
-    if(error){
+    if(status === 'failed'){
         return <Error message={error}/>
     }
 
@@ -29,19 +35,19 @@ function Home() {
         <>
             <div className='cards'>
                 {
-                    characters.map(item => (
-                            (item != "") && 
-                            <div className='card'>
-                                <img src={item.img} alt={item.name}/>
-                                <h3 className='name'>{item.name}</h3>
-                            </div>
+                    characters.map((item,index) => (
+                            (item !== "") &&
+                                <Link to={`char/${item.char_id}`} className='card' key={index}>
+                                    <img src={item.img} alt={item.name}/>
+                                    <h3 className='name'>{item.name}</h3>
+                                </Link>
                     ))
                 }
             </div>
 
             <div>
-                {isLoading && <Loading />}
-                {hasNextPage && !isLoading && 
+                {status === 'loading' && <Loading />}
+                {hasNextPage && status !== 'loading' && 
                 <button onClick={() => dispatch(getCharacters(nextPage))}> Lead More ({nextPage}) </button>}
 
                 {
