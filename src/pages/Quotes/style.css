@@ -1,0 +1,11 @@
+.quote_item{
+    padding: 10px;
+    font-size: 18px;
+    background-color: #032202;
+    color: #337800;
+    font-weight: bold;
+    margin: 10px 5px;
+}
+.quotes_info{
+    text-align: center;
+}
