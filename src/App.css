@@ -7,14 +7,23 @@ h3{
 
 /*navbar*/
 nav{
-    background-color: antiquewhite;
+    background-color: #032202;
 }
 nav ul{
     margin: 0 0 10px 0;
     display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     padding: 10px;
     list-style-type: none;
 }
 nav ul li{
+    background-color: #337800;
     padding: 5px;
+}
+a{
+    color: #032202;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
 }

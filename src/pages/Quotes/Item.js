@@ -1,10 +1,12 @@
 import React from 'react'
 import './style.css'
+
+import {Link} from "react-router-dom"
 function Item({item}) {
     return (
-        <div className='quote_item'>
+        <Link to={`/quotes/${item.quote_id}`} className='quote_item'>
             <q>{item.quote}</q> <strong> - {item.author.toUpperCase()}</strong>
-        </div>
+        </Link>
     )
 }
 

@@ -17,7 +17,6 @@ function Quotes() {
             dispatch(fetchAllQuotes())
         }
     }, [])
-
     if (error) {
         return <Error message={error} />
     }
