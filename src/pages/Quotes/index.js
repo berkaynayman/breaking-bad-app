@@ -13,10 +13,10 @@ function Quotes() {
     const error = useSelector(errorSelector)
 
     useEffect(() => {
-        if (status == 'idle') {
+        if (status === 'idle') {
             dispatch(fetchAllQuotes())
         }
-    }, [])
+    }, [dispatch, status])
     if (error) {
         return <Error message={error} />
     }
