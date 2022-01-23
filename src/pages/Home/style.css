@@ -14,5 +14,12 @@
     object-fit: cover;
 }
 .cards .card .name{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:576px) {
+    .cards .card{
+        width: 80%;
+    }
 }

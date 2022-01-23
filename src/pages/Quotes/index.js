@@ -26,7 +26,6 @@ function Quotes() {
             {
                 status === 'loading' && <Loading />
             }
-            Quotes
             {
                 status === 'succeeded' && data.map(item => <Item key={item.quote_id} item={item}/>)
             }
